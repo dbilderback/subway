@@ -10,14 +10,23 @@ function getResponse() {
     method: "GET"
     //done promise to pass the response object to function to build the gif display and associate the events
   }).done(function(response) {
-    //console.log(response);
+    console.log('Untouched Response');
+    console.log(response);
     //var station = groupDestinations(response, 'DESTINATIONS');
     var stations = groupDestinations(response, 'DESTINATION');
     //console.log(stations);
     var arrivals = getArrivals(response, 'FIVE POINTS STATION', 'STATION', 'NEXT_ARR', 'TRAIN_ID');
+    console.log('Arrivals at the five Points Stations');
     console.log(arrivals);
-    var trainStops = arrivals.returnTrainStops(response, 'TRAIN_ID');
-    console.log(trainStops);
+    var currentTrainStops = arrivals.returnTrainStops(response, 'TRAIN_ID');
+    console.log('Current Stops for COming into the stations'); 
+    console.log(currentTrainStops);
+    var currentBoardingStops = currentTrainStops.returnTrainLocations('Boarding', 'WAITING_TIME');
+    var currentArrivingStops = currentTrainStops.returnTrainLocations('Arriving', 'WAITING_TIME');
+    console.log('Trains that are boarding'); 
+    console.log(currentBoardingStops);
+    console.log('Trains that arriving');
+    console.log(currentArrivingStops);
     //console.log(response.hasValue("Airport", 'DESTINATION'));
     //fail promise to deal with unknown exceptions
   }).fail(function (jqXHR, textStatus) {
@@ -63,14 +72,22 @@ Array.prototype.returnTrainStops = function(response, trainID) {
     while (i--) {
       var x = response.length;
         while(x--) {
-          //if (this[i][property] == filter) {
-            console.log(this[i]);
         if (response[x][trainID] == this[i][1]) {
-          console.log(this[i][1]);
           trainStops.push(response[x]);   // Found it
         //}
         }  
       }
     }
     return trainStops;
+}
+
+Array.prototype.returnTrainLocations = function(filter, property) {
+    var currentStops = []; 
+    var i = this.length;
+    while (i--) {
+        if (this[i][property] == filter) {
+          currentStops.push(this[i]);   // Found it
+      }
+    }
+    return currentStops;
 }
