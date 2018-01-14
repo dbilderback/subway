@@ -2,7 +2,7 @@
 <head>
     <title>Subway Map</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.0.min.js"></script>
-    <script type="text/javascript" src="jquery.subwayMap-0.5.0.js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <style type="text/css">
     body
     {
@@ -50,54 +50,84 @@
     </style>
 </head>
 <body>
-    <div class="subway-map" data-columns="12" data-rows="10" data-cellSize="40" data-legendId="legend" data-textClass="text" data-gridNumbers="true" data-grid="false" data-lineWidth="8">
-        <ul data-color="#ff4db2" data-label="jQuery Widgets">          
-            <li data-coords="1.5,1" data-marker="interchange"><a href="http://jqueryui.com/demos/accordion/">Accordion</a></li>  
-            <li data-coords="4,2"><a href="http://jqueryui.com/demos/autocomplete/"><a href="http://jqueryui.com/demos/autocomplete/">Auto\ncomplete</a></li>  
-            <li data-coords="5,3" data-dir="E"></li>  
-            <li data-coords="5,7" data-marker="@station" data-labelPos="W"><a href="http://jqueryui.com/demos/slider/">Slider</a></li> <!-- marker-only node -->  
-            <li data-coords="6,4" data-dir="S" data-marker="interchange" data-markerInfo="h5"><a href="http://jqueryui.com/demos/datepicker/">Date\npicker</a></li>  
-            <li data-coords="7,4"></li>  
-            <li data-coords="7.15,8" data-marker="@station" data-labelPos="E"><a href="http://jqueryui.com/demos/dialog/">Dialog</a></li>  <!-- marker-only node, moved to the right by 0.15 -->
-            <li data-coords="8,3" data-dir="E"></li>  
-            <li data-coords="8,2"></li>  
-            <li data-coords="9,1" data-dir="N"></li>  
-            <li data-coords="10,2" data-dir="E" data-marker="interchange" data-labelPos="E"><a href="http://jqueryui.com/demos/button/">Button</a></li>  
-            <li data-coords="10,5"></li>  
-            <li data-coords="9,6" data-dir="S" data-marker="station"><a href="http://jqueryui.com/demos/progressbar/">Progress\nbar</a></li>  
-            <li data-coords="6,9"></li>  
-            <li data-coords="5,8" data-dir="W"></li>  
-            <li data-coords="5,7"></li>  
-            <li data-coords="4,6" data-dir="N"></li>  
-            <li data-coords="2,6"><a href="http://jqueryui.com/demos/tabs/">Tabs</a></li>  
+    <div class="subway-map" data-columns="12" data-rows="10" data-cellSize="120" data-legendId="legend" data-textClass="text" data-gridNumbers="true" data-grid="false" data-lineWidth="8">
+        
+        <!-- Red Line -->
+        <ul data-color="#ff0000" data-label="MARTA Red Line">      
+            <li data-coords="5.5,.4" data-marker="@interchange" data-labelPos="W"><a href="http://www.google.com">North Springs</a></li> 
+            <li data-coords="5.7,.9" data-dir="S" data-marker="interchange"></li>
+            <li data-coords="5.7,.9" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Sandy SPrings</a></li>
+            <li data-coords="5.9,1.4" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Dunwoody</a></li>
+            <li data-coords="5.75,1.9" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Medical Center</a></li>
+            <li data-coords="5.5,2.9" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Buckhead</a></li>
+            <li data-coords="5.2,3.6" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Lindbergh Center</a></li>
+            <li data-coords="4.85,4.3" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Arts Center</a></li>
+            <li data-coords="4.85,4.5" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Midtown</a></li>
+            <li data-coords="4.85,4.9" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">North Avenue</a></li>
+            <li data-coords="4.85,5.2" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Civic Center</a></li>
+            <li data-coords="4.85,5.6" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Peachtree Center</a></li> 
+            <li data-coords="4.85,6" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Five Points</a></li>
+            <li data-coords="4.6,6.45" data-dir="S" data-marker="interchange"></li>
+            <li data-coords="4.6,6.45" data-marker="@interchange" data-labelPos="W"><a href="http://www.google.com">Garnett</a></li>
+            <li data-coords="4.25,6.9" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">West End</a></li>
+            <li data-coords="4.25,7.25" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Oakland City</a></li>
+            <li data-coords="4.25,7.55" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Lakewood/Fort McPherson</a></li>
+            <li data-coords="4.25,7.85" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">East Point</a></li>
+            <li data-coords="4.25,8.35" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">College Park</a></li>
+            <li data-coords="4.50,9.1" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Airport</a></li>  
         </ul>
-        <!--added by daryl to show possible train route -->
-        <ul data-color="#000000" data-label="jQuery Widgets">          
-            <li data-coords="1.5,1" data-marker="interchange"><a href="http://jqueryui.com/demos/accordion/">Accordion</a></li>  
-            <li data-coords="4,2"><a href="http://jqueryui.com/demos/autocomplete/"><a href="http://jqueryui.com/demos/autocomplete/">Auto\ncomplete</a></li>  
-            <li data-coords="5,3" data-dir="E"></li>  
-            <li data-coords="5,7" data-marker="@station" data-labelPos="W"><a href="http://jqueryui.com/demos/slider/">Slider</a></li> <!-- marker-only node -->  
-            <li data-coords="6,4" data-dir="S" data-marker="interchange" data-markerInfo="h5"><a href="http://jqueryui.com/demos/datepicker/">Date\npicker</a></li>  
-            <li data-coords="7,4"></li>  
-            <li data-coords="7.15,8" data-marker="@station" data-labelPos="E"><a href="http://jqueryui.com/demos/dialog/">Dialog</a></li>
+        <!-- Gold Line -->
+        <ul data-color="#ffd700" data-label="MARTA Gold Line">
+            <li data-coords="6.8,2.1" data-marker="@interchange" data-labelPos="W"><a href="http://www.google.com">Doraville</a></li>
+            <li data-coords="6.45,2.45" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Chamblee</a></li>
+            <li data-coords="6.15,2.65" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Brookhaven</a></li>
+            <li data-coords="5.7,3.1" data-marker="interchange" data-labelPos="W"><a href="http://www.google.com">Lenox</a></li>
+            <li data-coords="5.25,3.6" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.90,4.3" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.90,4.5" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.90,4.9" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.90,5.2" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.90,5.6" data-marker="interchange" data-labelPos="W"></li> 
+            <li data-coords="4.90,6" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.65,6.45" data-dir="S" data-marker="interchange"></li>
+            <li data-coords="4.65,6.45" data-marker="@interchange" data-labelPos="W"></li>
+            <li data-coords="4.30,6.9" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.30,7.25" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.30,7.55" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.30,7.85" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.30,8.35" data-marker="interchange" data-labelPos="W"></li>
+            <li data-coords="4.55,9.1" data-marker="interchange" data-labelPos="W"></li>  
         </ul>
-        <!--added by daryl to show possible train route -->
-        <ul data-color="#ffffff" data-label="jQuery Widgets">          
-            <li data-coords="1.5,1" data-marker="interchange"><a href="http://jqueryui.com/demos/accordion/">Accordion</a></li>  
-            <li data-coords="4,2"><a href="http://jqueryui.com/demos/autocomplete/"><a href="http://jqueryui.com/demos/autocomplete/">Auto\ncomplete</a></li>  
-            <li data-coords="5,3" data-dir="E"></li>  
-            <li data-coords="5,7" data-marker="@station" data-labelPos="W"><a href="http://jqueryui.com/demos/slider/">Slider</a></li> <!-- marker-only node -->  
+        <!-- Blue Line -->
+        <ul data-color="#0000ff" data-label="MARTA Blue Line">
+            <li data-coords="2.25,6.1" data-marker="@interchange" data-labelPos="S"><a href="http://www.google.com">Hamilton E. Holmes</a></li>
+            <li data-coords="2.7,6.1" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">West Lake</a></li>
+            <li data-coords="3.6,6" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Ashby</a></li>
+            <li data-coords="3.95,6" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">Vine City</a></li>
+            <li data-coords="4.35,6" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Dome/GWCC/Phillis Arena/CNN Center</a></li>
+            <li data-coords="4.9,6" data-marker="interchange"></li>
+            <li data-coords="5.3,6" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Georgia State</a></li>
+            <li data-coords="5.6,6" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">King Memorial</a></li>
+            <li data-coords="5.9,6" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Inman Park/Reynoldstown</a></li>
+            <li data-coords="6.35,6" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">Edgewood/Candilier Park</a></li>
+            <li data-coords="6.75,6.1" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">East Lake</a></li>
+            <li data-coords="7.2,6.1" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">Decatur</a></li>
+            <li data-coords="7.6,6.1" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Avondale</a></li>
+            <li data-coords="7.9,6.1" data-marker="interchange" data-labelPos="N"><a href="http://www.google.com">Kennsington</a></li>
+            <li data-coords="8.4,6.1" data-marker="interchange" data-labelPos="S"><a href="http://www.google.com">Indian Creek</a></li>
         </ul>
-        <ul data-color="#00ff00" data-label="jQuery Interactions" data-shiftCoords="0,-1">      
-            <li data-coords="2,6"></li> 
-            <li data-coords="2,5.9" data-marker="@interchange"> </li> <!-- marker-only node, moved up by 0.10 -->
-            <li data-coords="5,6" data-marker="@station" data-labelPos="N"><a href="http://jqueryui.com/demos/selectable/">Selectable</a></li>  
-            <li data-coords="6,6"></li>  
-            <li data-coords="7,3" data-marker="@station" data-labelPos="W"><a href="http://jqueryui.com/demos/resizeable/">Resizeable</a></li>  
-            <li data-coords="7,5" data-dir="E" data-marker="station" data-labelPos="E"><a href="http://jqueryui.com/demos/droppable/">Droppable</a></li>  
-            <li data-coords="7,1" data-marker="interchange" data-labelPos="W"><a href="http://jqueryui.com/demos/draggable/">Draggable</a></li>  
+        <!-- Green Line -->
+        <ul data-color="#00ff00" data-label="MARTA Green Line">
+            <li data-coords="3,5.4" data-marker="@interchange" data-labelPos="W"><a href="http://www.google.com">Bankhead</a></li>
+            <li data-coords="3.6,5.95" data-marker="interchange" data-labelPos="S"></li>
+            <li data-coords="3.95,5.95" data-marker="interchange" data-labelPos="N"></li>
+            <li data-coords="4.35,5.95" data-marker="interchange" data-labelPos="S"></li>
+            <li data-coords="4.9,5.95" data-marker="interchange"></li>
+            <li data-coords="5.3,5.95" data-marker="interchange" data-labelPos="S"></li>
+            <li data-coords="5.6,5.95" data-marker="interchange" data-labelPos="N"></li>
+            <li data-coords="5.9,5.95" data-marker="interchange" data-labelPos="S"></li>
+            <li data-coords="6.35,5.95" data-marker="interchange" data-labelPos="N"></li>
         </ul>
-
     </div>
     <div id="legend"></div>
     
