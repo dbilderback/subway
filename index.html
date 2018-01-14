@@ -30,7 +30,7 @@
     {
         float: left;
         width: 250px;
-        height:400px;
+        height:100px;
     }
 
     #legend div
@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-    <div class="subway-map" data-columns="12" data-rows="10" data-cellSize="120" data-legendId="legend" data-textClass="text" data-gridNumbers="true" data-grid="false" data-lineWidth="8">
+    <div class="subway-map" data-columns="12" data-rows="10" data-cellSize="80" data-legendId="legend" data-textClass="text" data-gridNumbers="true" data-grid="false" data-lineWidth="8">
         
         <!-- Red Line -->
         <ul data-color="#ff0000" data-label="MARTA Red Line">      
@@ -130,8 +130,6 @@
         </ul>
     </div>
     <div id="legend"></div>
-    
-
     <script type="text/javascript">
         $(".subway-map").subwayMap({ debug: true });
     </script>

@@ -207,7 +207,7 @@ THE SOFTWARE.
                 var legend = $("#" + legendId);
 
                 for(var line=0; line<lineLabels.length; line++)
-                    legend.append("<div><span style='float:left;width:100px;height:" + lineWidth + "px;background-color:" + lineLabels[line].color + "'></span>" + lineLabels[line].label + "</div>");
+                    legend.append("<div><span style='float:left;width:20px;height:" + lineWidth + "px;background-color:" + lineLabels[line].color + "'></span>" + lineLabels[line].label + "</div>");
             }
 
         }
