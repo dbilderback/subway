@@ -145,14 +145,14 @@ function drawTrainRoute(trains) {
       var trainLine = $('#redTrain li');
       var trainRoute = $('<ul data-color="#ff00ff" id="redTrain" class="RED" data-label="Train#"></ul>').appendTo('#trainRoutes');
       for (i = 0; i < trainLine.length; i++) {
-        if (trainLine[i].attributes.length > 4) {
-          if (trainLine[i].attributes[3].nodeValue == station){
+        if (trainLine[i].attributes.length > 2) {
+          if (trainLine[i].attributes[2].nodeValue == station){
             trainLine.length=i;
             trainLine.each(function(index, value){
               trainRoute.append(value);
             });
           }
-          console.log(trainLine[i].attributes[3].nodeValue);
+          console.log(trainLine[i].attributes[2].nodeValue);
         }  
       }
     }
