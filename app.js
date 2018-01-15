@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-
+var stations = [];
 (function ($) {
 
     var plugin = {
@@ -61,7 +61,7 @@ THE SOFTWARE.
     },
     _getCanvasLayer: function (el, overlay) {
         this.layer++;
-        var canvas = $("<canvas style='position:absolute;z-Index:" + ((overlay ? 2000 : 1000) + this.layer) + "' width='" + this.options.pixelWidth + "' height='" + this.options.pixelHeight + "'></canvas>");
+        var canvas = $("<canvas class='canvas' style='position:absolute;z-Index:" + ((overlay ? 2000 : 1000) + this.layer) + "' width='" + this.options.pixelWidth + "' height='" + this.options.pixelHeight + "'></canvas>");
         el.append(canvas);
         return (canvas[0].getContext("2d"));
     },
@@ -120,6 +120,7 @@ THE SOFTWARE.
         this.options.pixelWidth = columns * scale;
         this.options.pixelHeight = rows * scale;
 
+        
         //el.css("width", this.options.pixelWidth);
         //el.css("height", this.options.pixelHeight);
         var self = this;
@@ -165,6 +166,9 @@ THE SOFTWARE.
                     var labelPos = $(this).attr("data-labelPos");
                     if (labelPos === undefined) labelPos = "s";
 
+                    var stationID = $(this).attr("data-station");
+                    if (stationID === undefined) stationID = "";
+
                     var marker = $(this).attr("data-marker");
                     if (marker == undefined) marker = "";
 
@@ -187,7 +191,7 @@ THE SOFTWARE.
                         if (title === undefined) title = "";
                     }
 
-                    self._debug("Coords=" + coords + "; Dir=" + dir + "; Link=" + link + "; Label=" + label + "; labelPos=" + labelPos + "; Marker=" + marker + "; Dotted=" + dotted);
+                    self._debug("Coords=" + coords + "; Dir=" + dir + "; Link=" + link + "; Label=" + label + "; labelPos=" + labelPos + "; stationID=" + stationID + "; Marker=" + marker + "; Dotted=" + dotted);
 
                     var x = "";
                     var y = "";
@@ -195,7 +199,7 @@ THE SOFTWARE.
                         x = Number(coords.split(",")[0]) + (marker.indexOf("interchange") > -1 ? 0 : shiftX);
                         y = Number(coords.split(",")[1]) + (marker.indexOf("interchange") > -1 ? 0 : shiftY);
                     }
-                    nodes[nodes.length] = { x: x, y: y, direction: dir, marker: marker, markerInfo: markerInfo, link: link, title: title, label: label, labelPos: labelPos, dotted: dotted };
+                    nodes[nodes.length] = { x: x, y: y, direction: dir, marker: marker, markerInfo: markerInfo, link: link, title: title, label: label, labelPos: labelPos, stationID: stationID, dotted: dotted };
                 });
                 if (nodes.length > 0)
                     self._drawLine(el, scale, rows, columns, color, (lineTextClass != "" ? lineTextClass : textClass), lineWidth, nodes, reverseMarkers);
@@ -337,8 +341,13 @@ THE SOFTWARE.
             case "interchange":
             case "@interchange":
                 ctx.lineWidth = width;
-                if (data.markerInfo == "")
+                if (data.markerInfo == "") {
                     ctx.arc(x, y, width * 0.7, 0, Math.PI * 2, true);
+                    var tempArr = [];
+                    tempArr.push(x, y, width, data['stationID'].toString());
+                    stations.push(tempArr);
+                    console.log(stations);
+                }
                 else
                 {
                     var mDir = data.markerInfo.substr(0,1).toLowerCase();
@@ -415,6 +424,7 @@ THE SOFTWARE.
             $("<span " + style + ">" + data.label.replace(/\\n/g,"<br />") + "</span>").appendTo(el);
 
     },
+
     _drawGrid: function (el, scale, gridNumbers) {
 
         var ctx = this._getCanvasLayer(el, false);
@@ -493,3 +503,18 @@ $.fn.subwayMap = function (method) {
 };
 
 })(jQuery);
+
+function isInCircle(x, y, width, clickX, clickY) {
+    var c = document.querySelector("canvas"), ctx = c.getContext("2d");
+var fgColor = "#ff0000";
+        var bgColor = "#00ff00";
+        
+  ctx.beginPath();
+  ctx.arc(x, y, width * 1.5, 0, Math.PI * 2, true);
+  
+  ctx.closePath();
+  if (ctx.isPointInPath(clickX, clickY)) {
+    return true;
+  }
+  //ctx.stroke();
+}

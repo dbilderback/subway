@@ -15,7 +15,7 @@ function getResponse() {
     //var station = groupDestinations(response, 'DESTINATIONS');
     var stations = groupDestinations(response, 'DESTINATION');
     //console.log(stations);
-    var arrivals = getArrivals(response, 'FIVE POINTS STATION', 'STATION', 'NEXT_ARR', 'TRAIN_ID');
+    var arrivals = getArrivals(response, 'DUNWOODY', 'STATION', 'NEXT_ARR', 'TRAIN_ID');
     console.log('Arrivals at the five Points Stations');
     console.log(arrivals);
     var currentTrainStops = arrivals.returnTrainStops(response, 'TRAIN_ID');
@@ -23,6 +23,8 @@ function getResponse() {
     console.log(currentTrainStops);
     var currentBoardingStops = currentTrainStops.returnTrainLocations('Boarding', 'WAITING_TIME');
     var currentArrivingStops = currentTrainStops.returnTrainLocations('Arriving', 'WAITING_TIME');
+    console.log('Arrivals at the five Points Stations');
+    console.log(arrivals);
     console.log('Trains that are boarding'); 
     console.log(currentBoardingStops);
     console.log('Trains that arriving');
@@ -91,3 +93,14 @@ Array.prototype.returnTrainLocations = function(filter, property) {
     }
     return currentStops;
 }
+function setClickEvents() {
+  $(document).on("click", ".stations", function(){
+  console.log($(this));
+});  
+}
+
+$(document).ready(function() {
+  $(document).on("click", ".stations", function(){
+  console.log($(this));
+  })
+});
