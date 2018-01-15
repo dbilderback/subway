@@ -1,3 +1,4 @@
+var returnRespone = {};
 function getResponse() {
   // This is the API key for Giphy
   var APIKey = "7cfbab76-7af1-4ce7-b579-d1662046422d";
@@ -12,6 +13,8 @@ function getResponse() {
   }).done(function(response) {
     console.log('Untouched Response');
     console.log(response);
+    returnResponse = response;
+    
     //var station = groupDestinations(response, 'DESTINATIONS');
     var stations = groupDestinations(response, 'DESTINATION');
     //console.log(stations);
@@ -23,17 +26,21 @@ function getResponse() {
     console.log(currentTrainStops);
     var currentBoardingStops = currentTrainStops.returnTrainLocations('Boarding', 'WAITING_TIME');
     var currentArrivingStops = currentTrainStops.returnTrainLocations('Arriving', 'WAITING_TIME');
+
     console.log('Arrivals at the five Points Stations');
     console.log(arrivals);
     console.log('Trains that are boarding'); 
     console.log(currentBoardingStops);
     console.log('Trains that arriving');
     console.log(currentArrivingStops);
+    console.log(returnResponse);
+    return returnResponse;
     //console.log(response.hasValue("Airport", 'DESTINATION'));
     //fail promise to deal with unknown exceptions
   }).fail(function (jqXHR, textStatus) {
     alert('The request for your subject failed please try another button');
   });
+  
 }
 
 function groupDestinations(array, property) {
@@ -93,14 +100,55 @@ Array.prototype.returnTrainLocations = function(filter, property) {
     }
     return currentStops;
 }
-function setClickEvents() {
-  $(document).on("click", ".stations", function(){
-  console.log($(this));
-});  
+
+Array.prototype.returnIncomingTrains = function(filter, property, station) {
+    var currentStops = []; 
+    var i = this.length;
+    while (i--) {
+        if (this[i][property] == filter) {
+          currentStops.push(this[i]);   // Found it
+      }
+    }
+    return currentStops;
 }
 
-$(document).ready(function() {
-  $(document).on("click", ".stations", function(){
-  console.log($(this));
-  })
-});
+function getIncomingTrains(response) {
+  var currentIncomingTrains = response.returnIncomingTrains('Arriving', 'WAITING_TIME', stations[i][3]);
+  currentIncomingTrains = currentIncomingTrains.concat(response.returnIncomingTrains('Boarding', 'WAITING_TIME', stations[i][3]));
+  console.log(currentIncomingTrains);
+  drawTrainRoute(currentIncomingTrains);
+}
+
+function drawTrainRoute(trains) {
+  for (i = 0; i < trains.length; i++) {
+    var destination = "";
+    var direction = "";
+    var line = "";
+    var nextArrival = "";
+    var station = "";
+    var train = "";
+    var wait = "";
+    var status = "";
+    destination = trains[i]['DESTINATION'].toString();
+    direction = trains[i]['DIRECTION'].toString();
+    line = trains[i]['LINE'].toString();
+    nextArrival = trains[i]['NEXT_ARR'].toString();
+    station = trains[i]['STATION'].toString();
+    train = trains[i]['TRAIN_ID'].toString();
+    wait = trains[i]['WAITING_SECONDS'].toString();
+    status = trains[i]['WAITING_TIME'].toString();
+    //if ($("ul.RED[data-station='" + station +"']")) {
+    //  console.log($("ul.RED[data-station]"));
+    //  $(this).attr("data-id")
+    //}
+    var old = $("#RED");
+        var items = $("#RED li");
+        var list = $('<ul data-color="#ff0000" id="RED" class="RED" data-label="MARTA Red Line"></ul>').appendTo('#trainRoutes');
+        
+        items.each(function(index, value){
+            list.append(value);
+        });
+    //$("#BigButton").clone().appendTo("#rightDiv");
+  }
+}
+

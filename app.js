@@ -344,7 +344,7 @@ var stations = [];
                 if (data.markerInfo == "") {
                     ctx.arc(x, y, width * 0.7, 0, Math.PI * 2, true);
                     var tempArr = [];
-                    tempArr.push(x, y, width, data['stationID'].toString());
+                    tempArr.push(x, y, width, data['stationID'].toString(), data['x'].toString(), data['y'].toString());
                     stations.push(tempArr);
                     console.log(stations);
                 }
@@ -499,7 +499,6 @@ $.fn.subwayMap = function (method) {
     } else {
         $.error('Method ' + method + ' does not exist on jQuery.tooltip');
     }
-
 };
 
 })(jQuery);
