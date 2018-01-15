@@ -141,14 +141,23 @@ function drawTrainRoute(trains) {
     //  console.log($("ul.RED[data-station]"));
     //  $(this).attr("data-id")
     //}
-    var old = $("#RED");
-        var items = $("#RED li");
-        var list = $('<ul data-color="#ff0000" id="RED" class="RED" data-label="MARTA Red Line"></ul>').appendTo('#trainRoutes');
-        
-        items.each(function(index, value){
-            list.append(value);
-        });
-    //$("#BigButton").clone().appendTo("#rightDiv");
+    if ((line == 'RED') && (direction == 'N')) {
+      var trainLine = $('#redTrain li');
+      var trainRoute = $('<ul data-color="#ff00ff" id="redTrain" class="RED" data-label="Train#"></ul>').appendTo('#trainRoutes');
+      for (i = 0; i < trainLine.length; i++) {
+        if (trainLine[i].attributes.length > 4) {
+          if (trainLine[i].attributes[3].nodeValue == station){
+            trainLine.length=i;
+            trainLine.each(function(index, value){
+              trainRoute.append(value);
+            });
+          }
+          console.log(trainLine[i].attributes[3].nodeValue);
+        }  
+      }
+    }
   }
+
+  
 }
 

@@ -61,7 +61,12 @@ var stations = [];
     },
     _getCanvasLayer: function (el, overlay) {
         this.layer++;
-        var canvas = $("<canvas class='canvas' style='position:absolute;z-Index:" + ((overlay ? 2000 : 1000) + this.layer) + "' width='" + this.options.pixelWidth + "' height='" + this.options.pixelHeight + "'></canvas>");
+
+        if (el[0].attributes[0].nodeValue == 'trainRoutes') {
+            var canvas = $("<canvas class='canvas' style='position:absolute;z-Index:" + ((overlay ? 9998 : 9999) + this.layer) + "' width='" + this.options.pixelWidth + "' height='" + this.options.pixelHeight + "'></canvas>");
+        } else {
+            var canvas = $("<canvas class='canvas' style='position:absolute;z-Index:" + ((overlay ? 2000 : 1000) + this.layer) + "' width='" + this.options.pixelWidth + "' height='" + this.options.pixelHeight + "'></canvas>");    
+        }
         el.append(canvas);
         return (canvas[0].getContext("2d"));
     },
