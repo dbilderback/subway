@@ -112,9 +112,9 @@ Array.prototype.returnIncomingTrains = function(filter, property, station) {
     return currentStops;
 }
 
-function getIncomingTrains(response) {
-  var currentIncomingTrains = response.returnIncomingTrains('Arriving', 'WAITING_TIME', stations[i][3]);
-  currentIncomingTrains = currentIncomingTrains.concat(response.returnIncomingTrains('Boarding', 'WAITING_TIME', stations[i][3]));
+function getIncomingTrains(response, station) {
+  var currentIncomingTrains = response.returnIncomingTrains('Arriving', 'WAITING_TIME', station);
+  currentIncomingTrains = currentIncomingTrains.concat(response.returnIncomingTrains('Boarding', 'WAITING_TIME', station));
   console.log(currentIncomingTrains);
   drawTrainRoute(currentIncomingTrains);
 }
@@ -137,27 +137,37 @@ function drawTrainRoute(trains) {
     train = trains[i]['TRAIN_ID'].toString();
     wait = trains[i]['WAITING_SECONDS'].toString();
     status = trains[i]['WAITING_TIME'].toString();
-    //if ($("ul.RED[data-station='" + station +"']")) {
-    //  console.log($("ul.RED[data-station]"));
-    //  $(this).attr("data-id")
-    //}
     if ((line == 'RED') && (direction == 'N')) {
-      var trainLine = $('#redTrain li');
-      var trainRoute = $('<ul data-color="#ff00ff" id="redTrain" class="RED" data-label="Train#"></ul>').appendTo('#trainRoutes');
-      for (i = 0; i < trainLine.length; i++) {
-        if (trainLine[i].attributes.length > 2) {
-          if (trainLine[i].attributes[2].nodeValue == station){
-            trainLine.length=i;
-            trainLine.each(function(index, value){
-              trainRoute.append(value);
-            });
-          }
-          console.log(trainLine[i].attributes[2].nodeValue);
-        }  
-      }
+      buildTrainUL('#redTrain li', '#ccffcc', 'RED', 'redTrain', station)
+    } else if ((line == 'RED') && (direction == 'S')) {
+      buildTrainUL('#redTrainRev li', '#ccff00', 'RED', 'redTrainRev', station);
+    } else if ((line == 'BLUE') && (direction == 'N')) {
+      buildTrainUL('#blueTrain li', '#ccffcc', 'BLUE', 'blueTrain', station)
+    } else if ((line == 'BLUE') && (direction == 'S')) {
+      buildTrainUL('#blueTrainRev li', '#ccff00', 'BLUE', 'blueTrainRev', station);
+    } else if ((line == 'GOLD') && (direction == 'N')) {
+      buildTrainUL('#goldTrain li', '#ccffcc', 'GOLD', 'goldTrain', station)
+    } else if ((line == 'GOLD') && (direction == 'S')) {
+      buildTrainUL('#goldTrainRev li', '#ccff00', 'GOLD', 'goldTrainRev', station);
+    } else if ((line == 'GREEN') && (direction == 'N')) {
+      buildTrainUL('#greenTrain li', '#ccffcc', 'GREEN', 'greenTrain', station)
+    } else if ((line == 'GREEN') && (direction == 'S')) {
+      buildTrainUL('#greenTrainRev li', '#ccff00', 'GREEN', 'greenTrainRev', station);
     }
   }
-
-  
 }
 
+function buildTrainUL(div, color, elClass, id, station) {
+  var trainLine = $(div);
+  var trainRoute = $('<ul data-color="'+color+'" id="'+id+'" class="'+elClass+'" data-label="Train#"></ul>').appendTo('#trainRoutes');
+  for (x = 0; x < trainLine.length; x++) {
+    if (trainLine[x].attributes.length > 2) {
+      if (trainLine[x].attributes[2].nodeValue == station){
+        trainLine.length=x;
+        trainLine.each(function(index, value){
+          trainRoute.append(value);
+        });
+      }
+    }  
+  }  
+}

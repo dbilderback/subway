@@ -316,7 +316,7 @@ var stations = [];
         for (node = 0; node < nodes.length; node++) {
             this._drawMarker(el, ctx, scale, color, textClass, width, nodes[node], reverseMarkers);
         }
-
+        localStorage.setItem("stations", JSON.stringify(stations));  
 
     },
     _drawMarker: function (el, ctx, scale, color, textClass, width, data, reverseMarkers) {
